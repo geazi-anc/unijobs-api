@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  api:
+    build: .
+    ports:
+      - 8000:8000
+
+    environment:
+      API_KEY: 9ff0b8280b79d4035b97b5c03c21a6e5
+
+    volumes:
+      - .:/unijobs-api
