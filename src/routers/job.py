@@ -6,8 +6,14 @@ from models.job import Job, JobModel
 
 from repositories.job_repos import JobRepos
 
+
 # ingections
-router = APIRouter(tags=['jobs'])
+router = APIRouter(
+    tags=['jobs'],
+    responses={404: {'description': 'Job not found'},
+               201: {'description': 'Job successfully created'}}
+)
+
 job_repos = JobRepos()
 API_KEY = os.environ['API_KEY']
 
@@ -29,7 +35,7 @@ def post_a_new_job(job: Job):
     return job
 
 
-@router.get('/jobs')
+@router.get('/jobs', response_model=list[JobModel])
 def get_jobs():
     jobs = job_repos.get_jobs()
     return jobs
