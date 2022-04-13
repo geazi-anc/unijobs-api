@@ -16,6 +16,8 @@ O framework FastAPI provém algumas ferramentas para a geração de documentaç�
 
 Para acessar a documentação interativa, vá para *http://localhost:8000/docs*
 
+Nota: para fazer chamada *delete* para o endpoint */jobs/{id}* é necessário fornecer a API Key no cabeçalho *X-Apikey* na requisição. A API Key está definida no arquivo *docker-compose.yml*, nas variáveis de ambiente. A variável de ambiente pode ser alterada para uma outra chave sem maiores problemas.
+
 ## Executando os testes Unitários
 Os testes unitários da API podem ser executados dentro do contêiner da API. Para isso, digite no terminal:
-`docker-compose api pytest src/tests`
+`docker-compose exec api pytest src/tests`
