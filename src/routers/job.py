@@ -2,6 +2,7 @@ import os
 
 from fastapi import APIRouter, HTTPException, Depends, status, Header
 
+
 from models.job import Job, JobModel
 
 from repositories.job_repos import JobRepos
@@ -14,8 +15,9 @@ router = APIRouter(
                201: {'description': 'Job successfully created'}}
 )
 
-job_repos = JobRepos()
-API_KEY = os.environ['API_KEY']
+job_repos=JobRepos()
+job_repos.create_table()
+API_KEY = os.getenv('API_KEY') or 'myapikey'
 
 
 ##### DEPENDENCIES #####
@@ -29,7 +31,7 @@ def is_authorized(x_apikey: str = Header(...)):
 
 
 ##### ROUTES #####
-@router.post('/jobs', status_code=201, response_model=JobModel)
+@router.post('/jobs', status_code=201, response_model=Job)
 def post_a_new_job(job: Job):
     job = job_repos.add(job)
     return job
